@@ -1,0 +1,16 @@
+PODS:
+  - NetworkToolKit (1.0.2)
+
+DEPENDENCIES:
+  - NetworkToolKit (from `.`)
+
+EXTERNAL SOURCES:
+  NetworkToolKit:
+    :path: "."
+
+SPEC CHECKSUMS:
+  NetworkToolKit: fa812e75bc3c7612362ffe45d4538c9db876f229
+
+PODFILE CHECKSUM: a2de9d6e236b92bf681f71e6c573cedde465e323
+
+COCOAPODS: 1.16.2

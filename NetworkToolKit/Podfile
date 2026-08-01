@@ -1,0 +1,8 @@
+platform :ios, '13.0'
+use_frameworks!
+
+project 'DemoApp/DemoApp/DemoApp.xcodeproj'
+
+target 'DemoApp' do
+  pod 'NetworkToolKit', :path => '.'
+end
