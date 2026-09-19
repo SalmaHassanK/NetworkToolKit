@@ -1,8 +1,10 @@
 platform :ios, '13.0'
 use_frameworks!
 
+source 'https://github.com/CocoaPods/Specs.git'
+
 project 'DemoApp/DemoApp/DemoApp.xcodeproj'
 
 target 'DemoApp' do
-  pod 'NetworkToolKit', :path => '.'
+  pod 'NetworkToolKit', '1.0.4'
 end

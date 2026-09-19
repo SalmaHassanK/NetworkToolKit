@@ -1,16 +1,16 @@
 PODS:
-  - NetworkToolKit (1.0.2)
+  - NetworkToolKit (1.0.4)
 
 DEPENDENCIES:
-  - NetworkToolKit (from `.`)
+  - NetworkToolKit (= 1.0.4)
 
-EXTERNAL SOURCES:
-  NetworkToolKit:
-    :path: "."
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - NetworkToolKit
 
 SPEC CHECKSUMS:
-  NetworkToolKit: fa812e75bc3c7612362ffe45d4538c9db876f229
+  NetworkToolKit: b137fb2ea6d55b0b9f53fc7593e4566fdb5e399a
 
-PODFILE CHECKSUM: a2de9d6e236b92bf681f71e6c573cedde465e323
+PODFILE CHECKSUM: 2680d4678a5b57587524a123542027976c712896
 
 COCOAPODS: 1.16.2
