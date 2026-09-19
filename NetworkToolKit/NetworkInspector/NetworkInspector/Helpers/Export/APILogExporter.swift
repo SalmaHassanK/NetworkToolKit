@@ -1,8 +1,8 @@
 //
 //  APILogExporter.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // Formats tracked request chains into human-readable plain-text logs
 // that can be shared via `UIActivityViewController`.

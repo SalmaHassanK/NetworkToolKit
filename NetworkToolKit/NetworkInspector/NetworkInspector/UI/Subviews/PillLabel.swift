@@ -1,8 +1,8 @@
 //
 //  PillLabel.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // A small coloured badge label used throughout the logger UI to display
 // status indicators (e.g. "SUCCESS", "2 fallbacks", "1 push").

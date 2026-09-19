@@ -1,6 +1,6 @@
 //
 //  InMemoryNetworkRecorder.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
 //  In-process recorder + reader used by `NetworkInspector.shared.enable()`.
 //  Keeps chains in memory and exposes them through an observable

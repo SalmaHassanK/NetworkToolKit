@@ -10,9 +10,9 @@
 //     ```swift
 //     NetworkInspector.shared.enable(
 //         uiConfiguration: .init(
-//             environment: "AWS-UAT",
-//             insights: MPesaChainBusinessInsights(),
-//             exportFormats: [.plainText, .brunoCollection]
+//             environment: "UAT",
+
+//             exportFormats: [.plainText, .markdown]
 //         )
 //     )
 //     ```

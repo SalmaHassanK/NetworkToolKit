@@ -1,8 +1,8 @@
 //
 //  APIRequestChain.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 20/06/2026.
+//  Created by Salma Kamal Eldin on 20/06/2026.
 //
 
 import Foundation

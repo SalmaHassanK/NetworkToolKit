@@ -1,8 +1,8 @@
 //
 //  ChainDetailVC.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // Detail screen for a single ``APIRequestChain``.
 //

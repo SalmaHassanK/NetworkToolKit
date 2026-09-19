@@ -1,6 +1,6 @@
 //
 //  NetworkInspectorRecorder.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
 //  Recording contract for the network inspector.
 //

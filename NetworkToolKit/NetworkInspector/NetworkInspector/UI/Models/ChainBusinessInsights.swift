@@ -1,6 +1,6 @@
 //
 //  ChainBusinessInsights.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
 //  Host-supplied extension point that injects app-specific knowledge of the
 //  response envelope into the otherwise transport-only logger:

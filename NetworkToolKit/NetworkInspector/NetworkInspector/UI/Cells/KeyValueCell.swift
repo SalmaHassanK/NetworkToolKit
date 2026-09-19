@@ -1,8 +1,8 @@
 //
 //  KeyValueCell.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // Horizontal key–value cell used for HTTP headers (in ``AttemptDetailVC``)
 // and overview rows (in ``ChainDetailVC``).

@@ -1,6 +1,6 @@
 //
 //  ExportShareCoordinator.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
 //  Centralises the share flow used by the inspector's panel and detail
 //  screens: when more than one ``ExportFormat`` is configured a picker is

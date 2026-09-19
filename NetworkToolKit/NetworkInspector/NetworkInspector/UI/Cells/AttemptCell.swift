@@ -1,8 +1,8 @@
 //
 //  AttemptCell.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // Table-view cell representing one ``APIAttempt`` in ``ChainDetailVC``.
 //

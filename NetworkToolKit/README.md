@@ -18,7 +18,7 @@ interceptor, chain state machines, recorder, in-memory store) is internal.
 
 ```ruby
 pod 'NetworkInspector',
-    :git => 'https://github.vodafone.com/vfgroup-mpa-superapp/NetworkToolKit.git',
+    :git => 'https://github.com/salma-kamaleldin/NetworkToolKit.git',
     :tag => '1.0.0'
 ```
 
@@ -370,8 +370,7 @@ small envelope), and don't capture heavy objects strongly.
 
 Frameworks that don't want a source-level dependency on this pod should
 define their own small inspection seam (protocol + no-op default) and bridge
-it with a single adapter file — `MPesaNetworkService` does this with
-`RequestInspecting` / `NoOpInspector` / `RequestInspector`:
+it with a single adapter file using `RequestInspecting` / `NoOpInspector` / `RequestInspector`:
 
 ```swift
 // Store builds / inspector off — plain networking, no inspector types anywhere:

@@ -1,8 +1,8 @@
 //
 //  DevTool+Styles.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // iOS 12-safe colour and font helpers used across the logger UI.
 //

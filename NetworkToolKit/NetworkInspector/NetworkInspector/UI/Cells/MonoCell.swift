@@ -1,8 +1,8 @@
 //
 //  MonoCell.swift
-//  MPesaNetworkService
+//  NetworkInspector
 //
-//  Created by Salma Kamal Eldin, Vodafone on 24/03/2026.
+//  Created by Salma Kamal Eldin on 24/03/2026.
 //
 // A simple table-view cell that renders text in a monospaced font.
 // Used in ``AttemptDetailVC`` to display URLs, request bodies, and response bodies.
