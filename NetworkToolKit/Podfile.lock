@@ -4,7 +4,7 @@ PODS:
   - ReactiveSwift (7.1.1)
 
 DEPENDENCIES:
-  - NetworkInspector (from `../`)
+  - NetworkInspector (from `.`)
 
 SPEC REPOS:
   trunk:
@@ -12,12 +12,12 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   NetworkInspector:
-    :path: "../"
+    :path: "."
 
 SPEC CHECKSUMS:
   NetworkInspector: 14cefafdce9fa48b3bbcd16b162b94b98eb13e1d
   ReactiveSwift: 477d3f5bc2eb3cbbba1c1636505752b83bef93b1
 
-PODFILE CHECKSUM: 34f7eb03700f4cb2463259e9f3b938f957ab5868
+PODFILE CHECKSUM: 0afdb1438c096f2c9ae9e1c2cedbf2c8af24c0af
 
 COCOAPODS: 1.16.2
