@@ -1,5 +1,5 @@
 import UIKit
-import NetworkInspector
+import NetworkToolKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -17,7 +17,7 @@ interceptor, chain state machines, recorder, in-memory store) is internal.
 ## Install
 
 ```ruby
-pod 'NetworkInspector',
+pod 'NetworkToolKit',
     :git => 'https://github.com/salma-kamaleldin/NetworkToolKit.git',
     :tag => '1.0.0'
 ```
@@ -36,7 +36,7 @@ receipt), so it is safe to call unconditionally from debug menus and internal
 builds.
 
 ```swift
-import NetworkInspector
+import NetworkToolKit
 
 NetworkInspector.shared.enable(
     uiConfiguration: .init(
@@ -182,7 +182,7 @@ no bookkeeping at all.
 
 ```swift
 import Foundation
-import NetworkInspector
+import NetworkToolKit
 
 final class APIClient {
     private let session = NetworkInspector.shared.makeSession(configuration: .default)
@@ -221,7 +221,7 @@ follow-ups, bounded by `maxOpenInterval` if provided.
 
 ```swift
 import Foundation
-import NetworkInspector
+import NetworkToolKit
 
 enum PaymentFlowError: Error {
     case timeout

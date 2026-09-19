@@ -1,23 +1,16 @@
 PODS:
-  - NetworkInspector (1.0.0):
-    - ReactiveSwift (= 7.1.1)
-  - ReactiveSwift (7.1.1)
+  - NetworkToolKit (1.0.2)
 
 DEPENDENCIES:
-  - NetworkInspector (from `.`)
-
-SPEC REPOS:
-  trunk:
-    - ReactiveSwift
+  - NetworkToolKit (from `.`)
 
 EXTERNAL SOURCES:
-  NetworkInspector:
+  NetworkToolKit:
     :path: "."
 
 SPEC CHECKSUMS:
-  NetworkInspector: 14cefafdce9fa48b3bbcd16b162b94b98eb13e1d
-  ReactiveSwift: 477d3f5bc2eb3cbbba1c1636505752b83bef93b1
+  NetworkToolKit: fa812e75bc3c7612362ffe45d4538c9db876f229
 
-PODFILE CHECKSUM: 0afdb1438c096f2c9ae9e1c2cedbf2c8af24c0af
+PODFILE CHECKSUM: a2de9d6e236b92bf681f71e6c573cedde465e323
 
 COCOAPODS: 1.16.2

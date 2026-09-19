@@ -4,5 +4,5 @@ use_frameworks!
 project 'DemoApp/DemoApp/DemoApp.xcodeproj'
 
 target 'DemoApp' do
-  pod 'NetworkInspector', :path => '.'
+  pod 'NetworkToolKit', :path => '.'
 end

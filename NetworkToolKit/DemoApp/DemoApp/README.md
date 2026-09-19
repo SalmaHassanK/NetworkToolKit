@@ -1,6 +1,6 @@
-# NetworkInspector Demo App
+# NetworkToolKit Demo App
 
-A demo iOS application showcasing the NetworkInspector pod functionality.
+A demo iOS application showcasing the NetworkToolKit pod functionality.
 
 ## Features
 
@@ -42,7 +42,7 @@ A demo iOS application showcasing the NetworkInspector pod functionality.
 - **MainViewController**: Main UI with request buttons and floating inspector button
 - **APIClient**: Network layer that uses NetworkInspector to track requests
 
-## NetworkInspector Integration
+## NetworkToolKit Integration
 
 The app demonstrates:
 - Enabling NetworkInspector at startup

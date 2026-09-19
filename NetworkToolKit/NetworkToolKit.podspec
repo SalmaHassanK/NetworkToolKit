@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 
-  s.name         = "NetworkInspector"
+  s.name         = "NetworkToolKit"
   s.version      = "1.0.2"
   s.summary      = "Network inspection and export tools for iOS"
   s.authors      = "salma.hassan.kamaleldin@gmail.com"
@@ -14,11 +14,11 @@ Pod::Spec.new do |s|
     :file => "NetworkToolKit/LICENSE"
   }
 
-  s.source              = {
+  s.source = {
     :git => 'https://github.com/SalmaHassanK/NetworkToolKit.git',
     :tag => s.version.to_s
   }
   s.source_files = "NetworkToolKit/NetworkInspector/NetworkInspector/**/*.{h,m,mm,swift}"
-  s.module_name         = "NetworkInspector"
+  s.module_name  = "NetworkToolKit"
 
 end
