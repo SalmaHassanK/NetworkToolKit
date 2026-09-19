@@ -14,18 +14,18 @@
 // ```
 //
 // ## Reactive updates
-// Each cell subscribes to `chain.attempts.signal` so it refreshes live
+// Each cell subscribes to `chain.attempts` publisher so it refreshes live
 // as new attempts are added or resolved. The subscription is disposed
 // in `prepareForReuse()` to prevent stale updates after cell recycling.
 
 import UIKit
-import ReactiveSwift
+import Combine
 
 /// Displays a single ``APIRequestChain`` row with tag, duration, URL, and status badges.
 final class ChainCell: UITableViewCell {
     static let reuseID = "ChainCell"
 
-    private var disposable: Disposable?
+    private var cancellable: AnyCancellable?
     private var insights: ChainBusinessInsights?
 
     /// Host `badges(for:)` implementations typically JSON-parse response
@@ -86,19 +86,18 @@ final class ChainCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposable?.dispose()
-        disposable = nil
+        cancellable = nil
         insights = nil
         badgeCache = nil
     }
 
     func configure(with chain: APIRequestChain, insights: ChainBusinessInsights?) {
         self.insights = insights
-        disposable?.dispose()
-        disposable = chain.attempts.signal
-            .observe(on: UIScheduler())
-            .observeValues { [weak self, weak chain] _ in
-                guard let self = self, let chain = chain else { return }
+        cancellable = chain.attempts
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self, weak chain] _ in
+                guard let self, let chain else { return }
                 self.apply(chain)
             }
         apply(chain)

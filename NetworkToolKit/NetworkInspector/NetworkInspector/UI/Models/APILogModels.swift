@@ -8,7 +8,7 @@
 // keeping the internal mutation surface (`request`, `response`, `setResponse()`) hidden.
 
 import Foundation
-import ReactiveSwift
+import Combine
 
 
 // MARK: - Attempt Outcome
@@ -79,8 +79,8 @@ protocol ChainDisplayable: AnyObject {
     var fallbackCount: Int { get }
     var externalCompletionCount: Int { get }
     var finalOutcome: AttemptOutcome { get }
-    var isResolved: MutableProperty<Bool> { get }
-    var attempts: MutableProperty<[APIAttempt]> { get }
+    var isResolved: CurrentValueSubject<Bool, Never> { get }
+    var attempts: CurrentValueSubject<[APIAttempt], Never> { get }
 }
 
 

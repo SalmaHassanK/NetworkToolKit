@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.authors      = "salma.hassan.kamaleldin@gmail.com"
   s.homepage     = "https://github.com/SalmaHassanK/NetworkToolKit.git"
   s.description  = "Provides the NetworkInspector module as a standalone reusable pod."
-  s.platform     = :ios, "11.0"
+  s.platform     = :ios, "13.0"
   s.swift_version = "5.0"
 
   s.source              = {
@@ -16,7 +16,5 @@ Pod::Spec.new do |s|
   s.source_files        = "NetworkInspector/NetworkInspector/**/*.{h,m,mm,swift}"
   s.public_header_files = "NetworkInspector/NetworkInspector/**/*.h"
   s.module_name         = "NetworkInspector"
-
-  s.dependency "ReactiveSwift", "7.1.1"
 
 end

@@ -17,7 +17,7 @@
 //
 // ## Live updates
 // The controller observes both `chain.attempts` and `chain.isResolved` via
-// ReactiveSwift signals so the table refreshes automatically when new attempts
+// Combine publishers so the table refreshes automatically when new attempts
 // arrive or the chain resolves.
 //
 // ## Thread safety
@@ -25,12 +25,10 @@
 // reload so the data-source methods never read the reactive property mid-mutation.
 
 import UIKit
-import ReactiveSwift
+import Combine
 
-/// Factory that returns an inset-grouped table on iOS 13+ or a plain grouped table on iOS 12.
 func makeTableView() -> UITableView {
-    if #available(iOS 13, *) { return UITableView(frame: .zero, style: .insetGrouped) }
-    return UITableView(frame: .zero, style: .grouped)
+    UITableView(frame: .zero, style: .insetGrouped)
 }
 
 /// Shows the overview and attempt timeline for a single ``APIRequestChain``.
@@ -43,7 +41,7 @@ final class ChainDetailVC: UIViewController {
     private let uiConfiguration: NetworkInspectorUIConfiguration
     private var insights: ChainBusinessInsights? { uiConfiguration.insights }
     private var shareBarItem: UIBarButtonItem?
-    private let disposables = CompositeDisposable()
+    private var cancellables = Set<AnyCancellable>()
 
     /// Snapshot of attempts captured on the main thread before each reload.
     /// All table-view data-source reads must use this instead of `chain.attempts.value`
@@ -72,23 +70,15 @@ final class ChainDetailVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) { fatalError() }
-    deinit { disposables.dispose() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = chain.tag
 
-        let shareItem: UIBarButtonItem
-        if #available(iOS 13, *) {
-            shareItem = UIBarButtonItem(
-                image: UIImage(systemName: "square.and.arrow.up"),
-                style: .plain, target: self, action: #selector(shareChain)
-            )
-        } else {
-            shareItem = UIBarButtonItem(
-                title: "Share", style: .plain, target: self, action: #selector(shareChain)
-            )
-        }
+        let shareItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain, target: self, action: #selector(shareChain)
+        )
         self.shareBarItem = shareItem
         navigationItem.rightBarButtonItem = shareItem
 
@@ -104,13 +94,17 @@ final class ChainDetailVC: UIViewController {
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         tableView.addGestureRecognizer(longPress)
 
-        disposables += chain.attempts.signal
-            .observe(on: UIScheduler())
-            .observeValues { [weak self] _ in self?.reloadTable() }
+        chain.attempts
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.reloadTable() }
+            .store(in: &cancellables)
 
-        disposables += chain.isResolved.signal
-            .observe(on: UIScheduler())
-            .observeValues { [weak self] _ in self?.reloadTable() }
+        chain.isResolved
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.reloadTable() }
+            .store(in: &cancellables)
 
         reloadTable()
     }

@@ -14,7 +14,7 @@
 // ```
 //
 // ## Features
-// - Real-time updates via ReactiveSwift observation on injected tracker chains.
+// - Real-time updates via Combine observation on injected tracker chains.
 // - Search bar to filter chains by analytics tag.
 // - "Clear" button with confirmation to wipe all tracked data.
 // - "Share" button that exports the chains via `UIActivityViewController`.
@@ -23,7 +23,7 @@
 //   is shown first; otherwise the share dialog opens directly.
 
 import UIKit
-import ReactiveSwift
+import Combine
 
 /// The main list screen showing every tracked ``APIRequestChain``.
 ///
@@ -35,7 +35,7 @@ public final class APILogsPanelVC: UIViewController {
     private let uiConfiguration: NetworkInspectorUIConfiguration
     private var chains:   [APIRequestChain] = []
     private var filtered: [APIRequestChain] = []
-    private let disposables = CompositeDisposable()
+    private var cancellables = Set<AnyCancellable>()
 
     init(
         tracker: NetworkInspectorReadable = InMemoryNetworkRecorder.shared,
@@ -79,8 +79,6 @@ public final class APILogsPanelVC: UIViewController {
 
     private var shareBarItem: UIBarButtonItem?
 
-    deinit { disposables.dispose() }
-
     public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -95,17 +93,10 @@ public final class APILogsPanelVC: UIViewController {
         )
         navigationItem.rightBarButtonItem?.tintColor = .systemRed
 
-        let shareItem: UIBarButtonItem
-        if #available(iOS 13, *) {
-            shareItem = UIBarButtonItem(
-                image: UIImage(systemName: "square.and.arrow.up"),
-                style: .plain, target: self, action: #selector(shareTapped)
-            )
-        } else {
-            shareItem = UIBarButtonItem(
-                title: "Share", style: .plain, target: self, action: #selector(shareTapped)
-            )
-        }
+        let shareItem = UIBarButtonItem(
+            image: UIImage(systemName: "square.and.arrow.up"),
+            style: .plain, target: self, action: #selector(shareTapped)
+        )
         self.shareBarItem = shareItem
         navigationItem.leftBarButtonItem = shareItem
 
@@ -121,14 +112,15 @@ public final class APILogsPanelVC: UIViewController {
             emptyLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
-        disposables += tracker.chains.producer
-            .observe(on: UIScheduler())
-            .startWithValues { [weak self] chains in
-                guard let self = self else { return }
+        tracker.chains
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] chains in
+                guard let self else { return }
                 self.chains = chains
                 self.applyFilter()
                 self.updateTitle()
             }
+            .store(in: &cancellables)
     }
 
     private func updateTitle() {

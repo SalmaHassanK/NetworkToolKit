@@ -4,7 +4,7 @@
 //
 //  In-process recorder + reader used by `NetworkInspector.shared.enable()`.
 //  Keeps chains in memory and exposes them through an observable
-//  `MutableProperty` for the inspector UI to consume.
+//  `CurrentValueSubject` for the inspector UI to consume.
 //
 //  ## Threading
 //  All mutations go through a concurrent `DispatchQueue` using barrier writes,
@@ -20,7 +20,7 @@
 //
 
 import Foundation
-import ReactiveSwift
+import Combine
 
 final class InMemoryNetworkRecorder: NetworkInspectorRecorder, NetworkInspectorReadable {
 
@@ -33,7 +33,7 @@ final class InMemoryNetworkRecorder: NetworkInspectorRecorder, NetworkInspectorR
 
     /// Observable list of all recorded chains, newest first. The inspector UI
     /// binds to this directly.
-    let chains: MutableProperty<[APIRequestChain]> = MutableProperty([])
+    let chains = CurrentValueSubject<[APIRequestChain], Never>([])
 
     /// Build environment label shown in the UI title. `nil` means the host
     /// did not supply one; the panel and export files omit the segment.
@@ -89,12 +89,12 @@ final class InMemoryNetworkRecorder: NetworkInspectorRecorder, NetworkInspectorR
 
             pending[correlationId] = PendingEntry(chain: chain, createdAt: Date())
             let maxChains = _configuration.maxChains
-            chains.modify {
-                $0.insert(chain, at: 0)
-                if $0.count > maxChains {
-                    $0 = Array($0.prefix(maxChains))
-                }
+            var updated = chains.value
+            updated.insert(chain, at: 0)
+            if updated.count > maxChains {
+                updated = Array(updated.prefix(maxChains))
             }
+            chains.value = updated
         }
     }
 
@@ -150,7 +150,7 @@ final class InMemoryNetworkRecorder: NetworkInspectorRecorder, NetworkInspectorR
             } else {
                 chain.isResolved.value = false
             }
-            chain.attempts.modify { _ in } // trigger UI update
+            chain.attempts.send(chain.attempts.value) // trigger UI update
         }
     }
 
@@ -158,7 +158,7 @@ final class InMemoryNetworkRecorder: NetworkInspectorRecorder, NetworkInspectorR
         queue.sync(flags: .barrier) {
             guard let chain = pending.removeValue(forKey: correlationId)?.chain else { return }
             chain.isResolved.value = true
-            chain.attempts.modify { _ in }
+            chain.attempts.send(chain.attempts.value)
         }
     }
 

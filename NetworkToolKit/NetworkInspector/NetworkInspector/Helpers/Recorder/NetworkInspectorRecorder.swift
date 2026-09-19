@@ -32,7 +32,7 @@
 //
 
 import Foundation
-import ReactiveSwift
+import Combine
 
 /// Lazy ciphertext-to-plaintext closure captured at encryption time.
 /// Stored per attempt and invoked by the inspector UI only when the user
@@ -44,7 +44,7 @@ public typealias AttemptDecryptor = (Data) throws -> Data
 /// ``InMemoryNetworkInspector`` conforms to this so the UI stays decoupled
 /// from the recording implementation.
 protocol NetworkInspectorReadable: AnyObject {
-    var chains: MutableProperty<[APIRequestChain]> { get }
+    var chains: CurrentValueSubject<[APIRequestChain], Never> { get }
     var environmentName: String? { get }
     func clearAll()
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ReactiveSwift
+import Combine
 
 // ## Model hierarchy
 // ```
@@ -27,8 +27,8 @@ final class APIRequestChain {
     let tag: String
     let createdAt: Date
 
-    let attempts: MutableProperty<[APIAttempt]> = MutableProperty([])
-    let isResolved: MutableProperty<Bool> = MutableProperty(false)
+    let attempts = CurrentValueSubject<[APIAttempt], Never>([])
+    let isResolved = CurrentValueSubject<Bool, Never>(false)
 
     var httpAttempts: [APIAttempt] { attempts.value.filter { !$0.isExternalCompletion } }
     var primaryAttempt: APIAttempt? { httpAttempts.first }
@@ -46,7 +46,7 @@ final class APIRequestChain {
     func addAttemptOrReturnIfExist(request: AttemptRequest) -> APIAttempt {
         if let existing = attempts.value.first(where: { $0.request.id == request.id }) { return existing }
         let attempt = APIAttempt(request: request, index: httpAttempts.count)
-        attempts.modify { $0.append(attempt) }
+        attempts.value.append(attempt)
         return attempt
     }
 }
