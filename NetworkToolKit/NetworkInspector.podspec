@@ -11,15 +11,14 @@ Pod::Spec.new do |s|
 
   s.license = {
     :type => "MIT",
-    :file => "LICENSE"
+    :file => "NetworkToolKit/LICENSE"
   }
 
   s.source              = {
     :git => 'https://github.com/SalmaHassanK/NetworkToolKit.git',
     :tag => s.version.to_s
   }
-  s.source_files        = "NetworkInspector/NetworkInspector/**/*.{h,m,mm,swift}"
-  s.public_header_files = "NetworkInspector/NetworkInspector/**/*.h"
+  s.source_files = "NetworkToolKit/NetworkInspector/NetworkInspector/**/*.{h,m,mm,swift}"
   s.module_name         = "NetworkInspector"
 
 end
