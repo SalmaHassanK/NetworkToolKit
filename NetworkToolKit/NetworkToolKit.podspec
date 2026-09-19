@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NetworkToolKit"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "Network inspection and export tools for iOS"
   s.authors      = "salma.hassan.kamaleldin@gmail.com"
   s.homepage     = "https://github.com/SalmaHassanK/NetworkToolKit.git"
